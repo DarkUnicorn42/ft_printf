@@ -6,7 +6,7 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:52:15 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/14 14:53:07 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:28:27 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdio.h>
 # include <stdarg.h>
 
-int		ft_printfp(void *p);
+int		ft_printfp(unsigned long long c);
 int		ft_printf(const char *f, ...);
 int		ft_printfc(int c);
 int		ft_printfi(int n);
