@@ -6,11 +6,11 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:27:48 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/13 16:47:23 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:09:10 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../ft_printf.h"
 
 size_t	ft_strlen(const char *str)
 {

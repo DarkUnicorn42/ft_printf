@@ -6,11 +6,11 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:58:47 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/14 14:09:16 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:09:06 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../ft_printf.h"
 
 static int	ft_hex_len(unsigned int num)
 {

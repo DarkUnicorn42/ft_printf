@@ -6,36 +6,37 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:30:30 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/15 15:36:24 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:54:16 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_printcases(const char *f, va_list args)
 {
 	int		counter;
 
 	counter = 0;
-	while (*f != 0)
+	while (*f++ != 0)
 	{
 		if (*f == '%')
 		{
 			f++;
 			if (*f == 'c' || *f == '%')
-				counter += ft_printfc(va_arg(args, int));
+				counter += ft_printfc(va_arg(args, int), f);
 			if (*f == 's')
 				counter += ft_printfstr(va_arg(args, const char *));
 			if (*f == 'p')
 				counter += ft_printfp(va_arg(args, unsigned long long));
-			if (*f == 'd' || *f == 'i' || *f == 'u')
+			if (*f == 'd' || *f == 'i')
 				counter += ft_printfi(va_arg(args, int));
+			if (*f == 'u')
+				counter += ft_printfu(va_arg(args, unsigned int));
 			if (*f == 'x' || *f == 'X')
 				counter += ft_printfxx(va_arg(args, unsigned int), f);
 		}
 		else
 			counter += write(1, f, 1);
-		f++;
 	}
 	return (counter);
 }
@@ -51,10 +52,10 @@ int	ft_printf(const char *f, ...)
 	va_end(args);
 	return (counter);
 }
-
+/*
 int	main(void)
 {
-/*
+
     ft_printf("c %c\n", 'A');
     printf("c OG %c\n", 'A');
     ft_printf("s %s\n", "Hello, world!");
@@ -73,7 +74,7 @@ int	main(void)
     printf("X OG %X\n", 0xEF01);
     ft_printf("%%\n");
     printf("OG %%\n");
-*/
+
 //	ft_printf("hello, %d, %c, %s, %x, %X\n", -9456, 'c', "asdasdasd", 15555555, 1234);
 //	printf("hello, %d, %c, %s, %x, %X\n", -9456, 'c', "asdasdasd", 15555555, 1234);
     // Testing NULL pointer
@@ -103,5 +104,9 @@ int	main(void)
     // Testing percent sign
     ft_printf("Testing percent sign: %%\n");
     printf("Original printf: %%\n");
+
+	ft_printf("Testing char sign: %c\n", 'a');
+    printf("Original char: %c\n", 'a');
 	return (0);
 }
+*/

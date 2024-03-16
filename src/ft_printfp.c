@@ -6,30 +6,12 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:27:28 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/15 15:34:16 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:45:57 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../ft_printf.h"
 /*
-int	ft_printfp(void *p)
-{
-	char	*tmp;
-	int		counter;
-
-	if (p == 0)
-		return (0);
-	counter = 0;
-	tmp = (char *)p;
-	while (*tmp != '\0')
-	{
-		write(1, tmp, 1);
-		tmp++;
-		counter++;
-	}
-	return (counter);
-}
-*/
 static int	ft_hex_len(unsigned int num)
 {
 	int	len;
@@ -42,6 +24,7 @@ static int	ft_hex_len(unsigned int num)
 	}
 	return (len);
 }
+*/
 
 int	ft_printfp(unsigned long long c)
 {
@@ -51,9 +34,9 @@ int	ft_printfp(unsigned long long c)
 	const char	*strl;
 
 	if (!c)
-		return (0);
+		return (write(1, "(nil)", 5));
 	i = 0;
-	len = ft_hex_len(c);
+	len = sizeof(void *) * 3 / 2;
 	strl = "0123456789abcdef";
 	str = (char *)malloc((sizeof(char) * (len + 3)));
 	if (str == NULL)

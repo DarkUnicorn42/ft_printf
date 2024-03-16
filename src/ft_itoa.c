@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwojtcza <mwojtcza@student.42warsaw.p      +#+  +:+       +#+        */
+/*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 15:01:41 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/09 18:32:48 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:08:37 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libftprintf.h"
+#include "../ft_printf.h"
 
 static int	ft_countstr(int n)
 {
