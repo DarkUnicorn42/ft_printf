@@ -6,19 +6,17 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:27:13 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/16 15:08:41 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:30:37 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-int	ft_printfc(int c, const char *f)
+int	ft_printfc(int c)
 {
 	char	cc;
 
 	cc = (char)c;
-	if (*f == '%')
-		cc = '%';
 	write(1, &cc, 1);
 	return (1);
 }

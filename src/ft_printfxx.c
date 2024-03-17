@@ -6,7 +6,7 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:58:47 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/16 15:09:06 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:23:49 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ static int	ft_printfxu(unsigned int c)
 	return (len);
 }
 
-int	ft_printfxx(unsigned int c, const char *f)
+int	ft_printfxx(unsigned int c, const char f)
 {
 	int	len;
 
 	len = ft_hex_len(c);
-	if (*f == 'x')
+	if (f == 'x')
 		ft_printfxl(c);
-	if (*f == 'X')
+	if (f == 'X')
 		ft_printfxu(c);
 	return (len);
 }

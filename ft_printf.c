@@ -6,49 +6,54 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:30:30 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/16 17:54:16 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:34:08 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_printcases(const char *f, va_list args)
+static int	ft_printcases(const char f, va_list args)
 {
 	int		counter;
 
 	counter = 0;
-	while (*f++ != 0)
-	{
-		if (*f == '%')
-		{
-			f++;
-			if (*f == 'c' || *f == '%')
-				counter += ft_printfc(va_arg(args, int), f);
-			if (*f == 's')
-				counter += ft_printfstr(va_arg(args, const char *));
-			if (*f == 'p')
-				counter += ft_printfp(va_arg(args, unsigned long long));
-			if (*f == 'd' || *f == 'i')
-				counter += ft_printfi(va_arg(args, int));
-			if (*f == 'u')
-				counter += ft_printfu(va_arg(args, unsigned int));
-			if (*f == 'x' || *f == 'X')
-				counter += ft_printfxx(va_arg(args, unsigned int), f);
-		}
-		else
-			counter += write(1, f, 1);
-	}
+	if (f == 'c')
+		counter += ft_printfc(va_arg(args, int));
+	else if (f == 's')
+		counter += ft_printfstr(va_arg(args, const char *));
+	else if (f == 'p')
+		counter += ft_printfp(va_arg(args, unsigned long long));
+	else if (f == 'd' || f == 'i')
+		counter += ft_printfi(va_arg(args, int));
+	else if (f == 'u')
+		counter += ft_printfu(va_arg(args, unsigned int));
+	else if (f == 'x' || f == 'X')
+		counter += ft_printfxx(va_arg(args, unsigned int), f);
+	else if (f == '%')
+		counter += write(1, "%", 1);
 	return (counter);
 }
 
 int	ft_printf(const char *f, ...)
 {
+	int		i;
 	int		counter;
 	va_list	args;
 
 	va_start (args, f);
 	counter = 0;
-	counter += ft_printcases(f, args);
+	i = 0;
+	while (f[i])
+	{
+		if (f[i] == '%')
+		{
+			counter += ft_printcases(f[i + 1], args);
+			i++;
+		}
+		else
+			counter += write(1, &f[i], 1);
+		i++;
+	}
 	va_end(args);
 	return (counter);
 }
@@ -75,8 +80,6 @@ int	main(void)
     ft_printf("%%\n");
     printf("OG %%\n");
 
-//	ft_printf("hello, %d, %c, %s, %x, %X\n", -9456, 'c', "asdasdasd", 15555555, 1234);
-//	printf("hello, %d, %c, %s, %x, %X\n", -9456, 'c', "asdasdasd", 15555555, 1234);
     // Testing NULL pointer
     ft_printf("Testing NULL pointer: %p\n", NULL);
     printf("Original printf: %p\n", NULL);
