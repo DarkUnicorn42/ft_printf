@@ -6,60 +6,60 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:30:30 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/17 15:34:08 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/24 12:25:41 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_printcases(const char f, va_list args)
+static void	ft_printcases(char f, va_list *args, int *len)
 {
-	int		counter;
-
-	counter = 0;
 	if (f == 'c')
-		counter += ft_printfc(va_arg(args, int));
+		ft_printfc(va_arg(*args, int), len);
 	else if (f == 's')
-		counter += ft_printfstr(va_arg(args, const char *));
+		ft_printfstr(va_arg(*args, const char *), len);
 	else if (f == 'p')
-		counter += ft_printfp(va_arg(args, unsigned long long));
+		ft_printfp(va_arg(*args, unsigned long int), len);
 	else if (f == 'd' || f == 'i')
-		counter += ft_printfi(va_arg(args, int));
+		ft_printfi(va_arg(*args, int), len);
 	else if (f == 'u')
-		counter += ft_printfu(va_arg(args, unsigned int));
+		ft_printfu(va_arg(*args, unsigned int), len);
 	else if (f == 'x' || f == 'X')
-		counter += ft_printfxx(va_arg(args, unsigned int), f);
+		ft_printfxx(va_arg(*args, unsigned int), f, len);
 	else if (f == '%')
-		counter += write(1, "%", 1);
-	return (counter);
+		ft_printfc('%', len);
 }
 
 int	ft_printf(const char *f, ...)
 {
 	int		i;
-	int		counter;
+	int		len;
 	va_list	args;
 
 	va_start (args, f);
-	counter = 0;
+	len = 0;
 	i = 0;
-	while (f[i])
+	while (f[i] != '\0')
 	{
 		if (f[i] == '%')
 		{
-			counter += ft_printcases(f[i + 1], args);
+			i++;
+			ft_printcases(f[i], &args, &len);
 			i++;
 		}
 		else
-			counter += write(1, &f[i], 1);
-		i++;
+		{
+			ft_printfc(f[i], &len);
+			i++;
+		}
 	}
 	va_end(args);
-	return (counter);
+	return (len);
 }
 /*
 int	main(void)
 {
+	ft_printf("dlugi ciag znakow %c\n, %c\n, %%\n", 'a', 'b');
 
     ft_printf("c %c\n", 'A');
     printf("c OG %c\n", 'A');

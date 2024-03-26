@@ -6,25 +6,26 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:30:30 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/16 15:41:26 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:23:54 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-int	ft_printfstr(const char *c)
+void	ft_printfstr(const char *c, int *len)
 {
 	size_t	i;
-	size_t	len;
 
 	if (c == 0)
-		return (write(1, "(null)", 6));
-	len = ft_strlen(c);
-	i = 0;
-	while (i < len)
 	{
-		write(1, &c[i], 1);
+		write(1, "(null)", 6);
+		(*len) += 6;
+		return ;
+	}
+	i = 0;
+	while (c[i] != '\0')
+	{
+		ft_printfc(c[i], len);
 		i++;
 	}
-	return (i);
 }

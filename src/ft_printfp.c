@@ -6,51 +6,37 @@
 /*   By: mwojtcza <mwojtcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:27:28 by mwojtcza          #+#    #+#             */
-/*   Updated: 2024/03/16 18:13:17 by mwojtcza         ###   ########.fr       */
+/*   Updated: 2024/03/23 18:15:12 by mwojtcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-/*
-static int	ft_hex_len(unsigned int num)
+
+void	ft_printfp(unsigned long int c, int *len)
 {
-	int	len;
+	char	str[25];
+	char	*base;
+	int		i;
 
-	len = 0;
-	while (num != 0)
-	{
-		len++;
-		num /= 16;
-	}
-	return (len);
-}
-*/
-
-int	ft_printfp(unsigned long long c)
-{
-	int			i;
-	int			len;
-	char		*str;
-	const char	*strl;
-
-	if (!c)
-		return (write(1, "(nil)", 5));
 	i = 0;
-	len = sizeof(void *) * 3 / 2;
-	strl = "0123456789abcdef";
-	str = (char *)malloc((sizeof(char) * (len + 3)));
-	if (str == NULL)
-		return (0);
-	i = len + 1;
-	while (i >= 2)
+	base = "0123456789abcdef";
+	if (c == 0)
 	{
-		str[i--] = strl[c % 16];
-		c /= 16;
+		write(1, "(nil)", 5);
+		(*len) += 5;
+		return ;
 	}
-	str[0] = '0';
-	str[1] = 'x';
-	str[len + 2] = '\0';
-	write(1, str, len + 2);
-	free(str);
-	return (len + 2);
+	else
+	{
+		write(1, "0x", 2);
+		(*len) += 2;
+		while (c != 0)
+		{
+			str[i] = base[c % 16];
+			c /= 16;
+			i++;
+		}
+		while (i--)
+			ft_printfc(str[i], len);
+	}
 }
